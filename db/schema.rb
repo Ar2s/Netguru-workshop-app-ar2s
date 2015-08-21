@@ -16,12 +16,6 @@ ActiveRecord::Schema.define(version: 20150821113517) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "participations", force: :cascade do |t|
     t.integer  "student_id"
     t.integer  "subject_item_id"
@@ -31,36 +25,6 @@ ActiveRecord::Schema.define(version: 20150821113517) do
 
   add_index "participations", ["student_id"], name: "index_participations_on_student_id", using: :btree
   add_index "participations", ["subject_item_id"], name: "index_participations_on_subject_item_id", using: :btree
-
-  create_table "payments", force: :cascade do |t|
-    t.float    "amount"
-    t.date     "pay_date"
-    t.date     "month"
-    t.integer  "student_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "payments", ["student_id"], name: "index_payments_on_student_id", using: :btree
-
-  create_table "products", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.text     "description"
-    t.float    "price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "category_id"
-    t.integer  "user_id"
-  end
-
-  create_table "reviews", force: :cascade do |t|
-    t.text     "content"
-    t.integer  "rating"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "product_id"
-    t.integer  "user_id"
-  end
 
   create_table "students", force: :cascade do |t|
     t.string   "first_name"
@@ -97,15 +61,6 @@ ActiveRecord::Schema.define(version: 20150821113517) do
     t.datetime "updated_at",     null: false
   end
 
-  create_table "tuition_payments", force: :cascade do |t|
-    t.integer  "amount",     null: false
-    t.date     "month",      null: false
-    t.datetime "date",       null: false
-    t.integer  "student_id"
-  end
-
-  add_index "tuition_payments", ["student_id"], name: "index_tuition_payments_on_student_id", using: :btree
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -123,24 +78,6 @@ ActiveRecord::Schema.define(version: 20150821113517) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "views", force: :cascade do |t|
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-  end
-
-  add_index "views", ["email"], name: "index_views_on_email", unique: true, using: :btree
-  add_index "views", ["reset_password_token"], name: "index_views_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "participations", "students"
   add_foreign_key "participations", "subject_items"
