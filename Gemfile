@@ -18,6 +18,8 @@ gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'dotenv-rails'
 gem 'gretel'
+gem 'devise'
+gem 'decent_decoration'
 
 group :development do
   gem 'better_errors'
@@ -35,6 +37,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring'
   gem 'web-console', '~> 2.0'
+  gem 'pry'
 end
 
 group :production do
