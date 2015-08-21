@@ -5,6 +5,6 @@ class ReportsController < ApplicationController
   
   def subjects
   	@subject_items = SubjectItem.all
-  	render 'subjects'
+  	render :subjects
   end
 end
